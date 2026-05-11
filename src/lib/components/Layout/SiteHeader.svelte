@@ -38,21 +38,17 @@ SiteHeader.svelte — NYCity News Service Style Header
 </script>
 
 <header class="site-header">
-  <!-- Compact masthead with logo left and nav right -->
   <div class="masthead-wrapper">
     <div class="masthead">
-      <a
-        href="https://www.nycitynewsservice.com/"
-        class="logo"
-        aria-label="NYCity News Service"
-      >
-        <!-- Compact HTML/CSS Logo with thin white border -->
-        <span class="logo-text">
-          <span class="logo-nycity">NYCITY</span><span class="logo-news-service"
-            >News Service</span
-          >
-        </span>
-      </a>
+      <h1 class="hero-row">
+        <div class="topline"> The </div> 
+        <div class="red">  United States  </div>
+        <div class="topline"> of </div>
+          New York
+      </h1>
+      <h4 class="hero-row">
+      Inside the race to become New York’s next top political donor
+      </h4>
 
       <!-- Navigation inline with logo -->
       {#if navLinks.length > 0}
@@ -80,75 +76,41 @@ SiteHeader.svelte — NYCity News Service Style Header
 
   /* Full-width blue background with animated dark-to-light gradient */
   .masthead-wrapper {
-    background: linear-gradient(
-      90deg,
-      var(--color-cuny-blue-dark) 0%,
-      var(--color-accent) 50%,
-      var(--color-cuny-blue-light) 100%
-    );
-    background-size: 200% 100%;
-    animation: gradient-sweep 6s ease-in-out infinite;
-  }
-
-  @keyframes gradient-sweep {
-    0% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 0%;
-    }
-    100% {
-      background-position: 0% 0%;
-    }
+    background: #0b0d63;
+    padding: 1rem;
   }
 
   /* Compact Masthead - Mobile: centered */
   .masthead {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: 0;
     max-width: var(--max-width-wide);
     margin: 0 auto;
   }
 
-  .logo {
-    display: inline-block;
-    text-decoration: none;
-  }
-
-  .logo:hover {
-    text-decoration: none;
-  }
-
-  .logo-text {
-    display: inline-flex;
-    align-items: stretch;
-    border: 1px solid var(--color-white);
-  }
-
-  .logo-nycity {
-    background-color: var(--color-white);
-    color: var(--color-accent);
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-extrabold);
-    padding: var(--logo-padding-mobile);
-    letter-spacing: var(--letter-spacing-wide);
-    text-transform: uppercase;
+  .hero-row {
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+    color: #ffffff;
+    word-spacing: 0.20rem;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    line-height: 1.05;
+    gap: 1rem;
   }
 
-  .logo-news-service {
-    color: var(--color-white);
-    font-family: var(--font-sans);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-light);
-    padding: var(--logo-padding-mobile);
-    letter-spacing: var(--letter-spacing-tight);
-    display: flex;
-    align-items: center;
+  .topline {
+    color: #ffbd59;
+  }
+
+  .red {
+    color: #ff5757;
   }
 
   /* Navigation - hidden on mobile */
@@ -186,23 +148,24 @@ SiteHeader.svelte — NYCity News Service Style Header
   /* Desktop styles - show nav, space-between layout, larger logo */
   @include desktop {
     .masthead {
-      justify-content: space-between;
-      padding: var(--font-size-xs) var(--spacing-md);
+      padding: 0;
     }
 
-    .logo-nycity {
-      font-size: var(--font-size-base);
-      padding: var(--logo-padding-desktop);
-    }
-
-    .logo-news-service {
-      font-size: var(--font-size-base);
-      padding: var(--logo-padding-desktop);
+    .hero-row {
+      padding: var(--spacing-xl) var(--spacing-md);
+      font-size: clamp(2rem, 5vw, 4rem);
     }
 
     .main-nav {
       display: flex;
       align-items: center;
+       justify-content: center;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+    }
+
+    .nav-list {
+      justify-content: center;
+      flex-wrap: wrap;
     }
   }
 </style>

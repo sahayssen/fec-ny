@@ -4,24 +4,16 @@ import SiteHeader from '$lib/components/Layout/SiteHeader.svelte';
 import SiteFooter from '$lib/components/Layout/SiteFooter.svelte';
 
 describe('SiteHeader', () => {
-  it('renders the logo', () => {
+  it('renders the masthead title', () => {
     render(SiteHeader);
-    expect(screen.getByLabelText('NYCity News Service')).toBeTruthy();
+    expect(screen.getByText('New York')).toBeTruthy();
   });
 
-  it('renders default navigation links', () => {
+  it('renders the hero subtitle', () => {
     render(SiteHeader);
-    expect(screen.getByText('Arts & Culture')).toBeTruthy();
-    expect(screen.getByText('Politics')).toBeTruthy();
-  });
-
-  it('renders custom navigation links', () => {
-    render(SiteHeader, {
-      props: {
-        navLinks: [{ label: 'Sports', href: '/sports' }],
-      },
-    });
-    expect(screen.getByText('Sports')).toBeTruthy();
+    expect(
+      screen.getByText("Inside the race to become New York’s next top political donor")
+    ).toBeTruthy();
   });
 
   it('hides nav when navLinks is empty', () => {

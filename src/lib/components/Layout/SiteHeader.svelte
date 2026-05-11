@@ -3,7 +3,6 @@
 SiteHeader.svelte — NYCity News Service Style Header
 -->
 <script>
-
 </script>
 
 <header class="site-header">

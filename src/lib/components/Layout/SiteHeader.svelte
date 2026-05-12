@@ -15,8 +15,12 @@ SiteHeader.svelte — NYCity News Service Style Header
           New York
       </h1>
       <h4 class="hero-row">
+      <div class="subtitle">
       Inside the race to become New York’s next top political donor
+      </div>
       </h4>
+    </div>
+    </div>
 </header>
 
 <style lang="scss">
@@ -47,15 +51,27 @@ SiteHeader.svelte — NYCity News Service Style Header
   .hero-row {
     width: 100%;
     margin: 0;
-    padding: 1rem;
+    padding: 0.15rem;
     text-align: center;
     color: #ffffff;
     word-spacing: 0.20rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    line-height: 1.05;
+    line-height: 1.0;
     gap: 1rem;
+  }
+
+  h1.hero-row {
+    font-size: 10rem;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  h4.hero-row {
+    font-size: 10rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
 
   .topline {
@@ -75,7 +91,7 @@ SiteHeader.svelte — NYCity News Service Style Header
     display: flex;
     flex-wrap: nowrap;
     list-style: none;
-    gap: var(--spacing-md);
+    gap: var(--spacing-xs);
     margin: 0;
     padding: 0;
   }
@@ -105,8 +121,15 @@ SiteHeader.svelte — NYCity News Service Style Header
     }
 
     .hero-row {
-      padding: var(--spacing-xl) var(--spacing-md);
-      font-size: clamp(2rem, 5vw, 4rem);
+      padding: 0.15rem;
+    }
+
+    h1.hero-row {
+      font-size: 4rem;
+    }
+
+    h4.hero-row {
+      font-size: 1.5rem;
     }
 
     .main-nav {

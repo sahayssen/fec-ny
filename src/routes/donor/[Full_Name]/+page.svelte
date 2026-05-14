@@ -16,6 +16,18 @@ let { data } = $props();
   );
   const donationCount = peepRows.length;
 
+  // compute rank among all individuals by total donated
+  const aggPeople = {};
+  peeps.forEach((p) => {
+    const name = p.Full_Name || '';
+    const amt = parseFloat(p.contribution_receipt_amount) || 0;
+    if (!aggPeople[name]) aggPeople[name] = { Full_Name: name, total: 0 };
+    aggPeople[name].total += amt;
+  });
+  const rankedPeople = Object.values(aggPeople).sort((a, b) => b.total - a.total);
+  const rankIndex = rankedPeople.findIndex((r) => r.Full_Name === FullName);
+  const rank = rankIndex >= 0 ? rankIndex + 1 : null;
+
   const formatCurrency = (amount) =>
     new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -41,9 +53,7 @@ let { data } = $props();
   };
 
 </script>
-
-<div class="container">
-
+<div class="container-wide">
 <button>
   <span> 
   <a class="a.back" href={`${base}/`}>
@@ -51,14 +61,20 @@ let { data } = $props();
   </a>
   </span>
 </button>
-<br/>
-<br/>
-
-  <h1>{peep?.Full_Name ?? FullName}</h1>
-  <h4> <strong>Occupation:</strong> {peep?.contributor_occupation ?? contributor_occupations}, {peep?.contributor_employer ?? contributor_employer} </h4>
-  <h4> <strong>Address:</strong> {peep?.contributor_street_1 ?? contributor_street_1} {peep?.contributor_street_2 ?? contributor_street_2} {peep?.contributor_city ?? contributor_city}, {peep?.contributor_state ?? contributor_state}</h4>
-  <h4><strong>Total donated:</strong> {formatCurrency(totalDonated)}</h4>
-  <h4><strong>Number of donations:</strong> {donationCount}</h4>
+</div>
+<div class="container">
+  <div class="hero-row">
+    <span class="star" role="img" aria-label="Donor rank">
+      <span class="star-label">{rank ?? '—'}</span>
+    </span>
+    <div class="hero-text">
+      <h1>{peep?.Full_Name ?? FullName}</h1>
+      <h4> <strong>Occupation:</strong> {peep?.contributor_occupation ?? contributor_occupations}, {peep?.contributor_employer ?? contributor_employer} </h4>
+      <h4> <strong>Address:</strong> {peep?.contributor_street_1 ?? contributor_street_1} {peep?.contributor_street_2 ?? contributor_street_2} {peep?.contributor_city ?? contributor_city}, {peep?.contributor_state ?? contributor_state}</h4>
+      <h4><strong>Total donated:</strong> {formatCurrency(totalDonated)}</h4>
+      <h4><strong>Number of donations:</strong> {donationCount}</h4>
+    </div>
+  </div>
 
 <RankingList>
 <table>
@@ -99,6 +115,22 @@ let { data } = $props();
 <style>
   /* From Uiverse.io by Ali-Tahmazi99 */ 
 /* From uiverse.io by @Ali-Tahmazi99 */
+  .star {
+    width: 200px;
+    aspect-ratio: 1;
+    background: #ff5757;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #5170ff;
+    font-weight: 700;
+    font-size: 3rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    transform: translateX(-0.75rem);
+    /* Simple star shape via polygon clip-path */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
 button {
  display: inline-block;
  width: 100px;
@@ -180,4 +212,27 @@ button span {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  .hero-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-text {
+    margin-top: 0.15rem;
+  }
+
+  .hero-text h1 {
+    margin: 0 0 0.35rem 0;
+  }
+
+  .hero-text h4 {
+    margin: 0.2rem 0;
+  }
+
+  /* removed .rank-star in favor of .star CSS-only badge */
 </style>

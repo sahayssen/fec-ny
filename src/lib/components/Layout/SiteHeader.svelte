@@ -3,28 +3,39 @@
 SiteHeader.svelte — NYCity News Service Style Header
 -->
 <script>
+import { base } from '$app/paths';
 </script>
 
 <header class="site-header">
   <div class="masthead-wrapper">
     <div class="masthead">
-      <h1 class="hero-row">
-        <div class="topline"> The </div> 
-        <div class="red">  United States  </div>
-        <div class="topline"> of </div>
-          New York
-      </h1>
-      <h4 class="hero-row">
-      <div class="subtitle">
-      Inside the race to become New York’s next top political donor
+     <div class="logo">
+          <img src={`${base}/photos/USNY.png`} alt="NYCity News Service logo">
+        </div>
+      <div class="hero-row">
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a class="nav-link" href="/">Home</a></li>
+            <li><a class="nav-link" href="/individual">Individual</a></li>
+            <li><a class="nav-link" href="/organization">Organization</a></li>
+            <li><a class="nav-link" href="/methodology">Methodology</a></li>
+          </ul>
+        </nav>
       </div>
-      </h4>
     </div>
     </div>
 </header>
 
 <style lang="scss">
   @use '../../styles' as *;
+  .logo {
+    width: 120%;
+    max-width: 8rem;
+    height: 7.5rem;
+    align-items:left;
+    margin-left: 4rem;
+    display: block;
+  }
 
   .site-header {
     border-bottom: 0px solid var(--color-accent);
@@ -40,19 +51,17 @@ SiteHeader.svelte — NYCity News Service Style Header
   /* Compact Masthead - Mobile: centered */
   .masthead {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
+    flex-direction: center;
+    align-items: center;
     padding: 0;
     max-width: var(--max-width-wide);
-    margin: 0 auto;
   }
 
   .hero-row {
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
     padding: 0.15rem;
-    text-align: center;
+    text-align: left;
     color: #ffffff;
     word-spacing: 0.20rem;
     display: flex;
@@ -65,13 +74,13 @@ SiteHeader.svelte — NYCity News Service Style Header
   h1.hero-row {
     font-size: 10rem;
     margin-bottom: 0.5rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 
   h4.hero-row {
     font-size: 10rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
   }
 
   .topline {
@@ -91,27 +100,31 @@ SiteHeader.svelte — NYCity News Service Style Header
     display: flex;
     flex-wrap: nowrap;
     list-style: none;
-    gap: var(--spacing-xs);
-    margin: 0;
-    padding: 0;
+    gap: var(--spacing-xl);
+    margin-top: 2rem;
+    padding: 1rem;
+    align-items: center;
+    font-size: 1rem;
+    justify-content: center;
   }
 
   .nav-link {
     color: var(--color-white);
     text-decoration: none;
     font-family: var(--font-sans);
-    font-size: var(--font-size-xs);
+    font-size: 20px;
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     white-space: nowrap;
     transition: var(--transition-opacity);
+    align-items: center;
   }
 
   .nav-link:hover {
-    color: var(--color-white);
+    text-decoration: underline;
+    color: #ff5757;
     opacity: var(--opacity-hover);
-    text-decoration: none;
   }
 
   /* Desktop styles - show nav, space-between layout, larger logo */

@@ -1,5 +1,3 @@
-This is your page!
--->
 <script>
 import RankingCard from '$lib/components/Data/RankingCard.svelte';
 import RankingList from '$lib/components/Data/RankingList.svelte';
@@ -56,6 +54,9 @@ let { data } = $props();
 
 
  <div class="container">
+ <img src={`${base}/photos/Individual.png`} alt="NYCity News Service logo">
+ <br/>
+ <br/>
   <RankingList title="Top Individual Donors">
     {#each ranked as item, index}
       <RankingCard
@@ -69,19 +70,11 @@ let { data } = $props();
     {/each}
   </RankingList>
 
-  <br/>
-  <br/>
-
-  <RankingList title="Top Organization Donors">
-    {#each rankedOrgs as item, index}
-      <RankingCard
-        rank={index + 1}
-        title={item.contributor_name}
-        description={item.contributor_city}
-        value={formatCurrency(item.total)}
-        valueLabel="total"
-        href={`${base}/org/${encodeURIComponent(item.contributor_name)}`}
-      />
-    {/each}
-  </RankingList>
 </div>
+
+<style>
+img {
+    width: 30%;
+    height: 30%;
+}
+</style>

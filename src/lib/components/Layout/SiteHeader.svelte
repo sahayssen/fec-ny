@@ -15,10 +15,10 @@ import { base } from '$app/paths';
       <div class="hero-row">
         <nav class="main-nav">
           <ul class="nav-list">
-            <li><a class="nav-link" href="/">Home</a></li>
-            <li><a class="nav-link" href="/individual">Individual</a></li>
-            <li><a class="nav-link" href="/organization">Organization</a></li>
-            <li><a class="nav-link" href="/methodology">Methodology</a></li>
+            <li><a class="nav-link" href={`${base}/`}>Home</a></li>
+            <li><a class="nav-link" href={`${base}/indv`}>Individuals</a></li>
+            <li><a class="nav-link" href={`${base}/company`}>Organization</a></li>
+            <li><a class="nav-link" href={`${base}/`}>Methodology</a></li>
           </ul>
         </nav>
       </div>

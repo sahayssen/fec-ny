@@ -6,7 +6,9 @@ let { data } = $props();
 
   const orgs = data.orgs || [];
   const contributorName = data.contributorName || '';
-  const orgRows = orgs.filter((item) => item.contributor_name === contributorName);
+  const orgRows = orgs
+    .filter((item) => item.contributor_name === contributorName)
+    .sort((a, b) => (parseFloat(b.contribution_receipt_amount) || 0) - (parseFloat(a.contribution_receipt_amount) || 0));
   const org = orgRows[0];
 
   const addressLine = [
@@ -24,6 +26,18 @@ let { data } = $props();
   );
   const donationCount = orgRows.length;
 
+  const aggPeople = {};
+
+  orgs.forEach((p) => {
+    const name = p.contributor_name || '';
+    const amt = parseFloat(p.contribution_receipt_amount) || 0;
+    if (!aggPeople[name]) aggPeople[name] = { contributor_name: name, total: 0 };
+    aggPeople[name].total += amt;
+  });
+  const rankedPeople = Object.values(aggPeople).sort((a, b) => b.total - a.total);
+  const rankIndex = rankedPeople.findIndex((r) => r.contributor_name === contributorName);
+  const rank = rankIndex >= 0 ? rankIndex + 1 : null;
+
   const formatCurrency = (amount) =>
     new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -33,14 +47,18 @@ let { data } = $props();
 
   const itemsPerPage = 10;
   let currentPage = $state(1);
-  
-  const totalPages = $derived(Math.ceil(orgRows.length / itemsPerPage));
-  const paginatedRows = $derived(
-    orgRows.slice(
+
+  let totalPages = $state(1);
+  let paginatedRows = $state([]);
+
+  $effect(() => {
+    totalPages = Math.max(1, Math.ceil(orgRows.length / itemsPerPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+    paginatedRows = orgRows.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
-    )
-  );
+    );
+  });
 
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -49,8 +67,7 @@ let { data } = $props();
   };
 
 </script>
-
-<div class="container">
+<div class="homebutton container-wide">
 <button>
   <span> 
   <a class="a.back" href={`${base}/`}>
@@ -58,24 +75,31 @@ let { data } = $props();
   </a>
   </span>
 </button>
-<br/>
-<br/>
+</div>
 
+<div class="container">
+<div class="hero-row">
+    <span class="star" role="img" aria-label="Donor rank">
+      <span class="star-label">{rank ?? '—'}</span>
+    </span>
+  <div class="hero-text">
   <h1>{org?.contributor_name ?? contributorName}</h1>
+  <br/>
   <h4><strong>Address:</strong> {addressLine || 'Address unavailable'}</h4>
   <h4><strong>Total donated:</strong> {formatCurrency(totalDonated)}</h4>
   <h4><strong>Number of donations:</strong> {donationCount}</h4>
+</div>
+</div>
 <RankingList>
 <table>
   <thead>
     <tr>
       <th>Recipient</th>
-      <th> Type </th> 
+      <th>Type </th> 
       <th>Amount</th>
-      <th> Date</th>
+      <th>Date</th>
     </tr>
   </thead>
-  
   <tbody>
     {#each paginatedRows as row}
       <tr>
@@ -104,6 +128,22 @@ let { data } = $props();
 
 
 <style>
+.star {
+    width: 200px;
+    aspect-ratio: 1;
+    background: #ff5757;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #5170ff;
+    font-weight: 700;
+    font-size: 3rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    transform: translateX(-0.75rem);
+    /* Simple star shape via polygon clip-path */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
 button {
  display: inline-block;
  width: 100px;
@@ -191,5 +231,31 @@ button span {
   .pagination button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+  .hero-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: -3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-text {
+    margin: 0;
+    line-height: 25px;
+  }
+
+  .hero-text h1 {
+    margin: 0 0 0.35rem 0;
+  }
+
+  .hero-text h4 {
+    margin: 0.2rem 0;
+    line-height: 25px;
+  }
+  .homebutton {
+    margin-left: 8rem;
+    margin-top: 3rem;
   }
 </style>

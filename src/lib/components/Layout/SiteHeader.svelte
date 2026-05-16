@@ -10,15 +10,15 @@ import { base } from '$app/paths';
   <div class="masthead-wrapper">
     <div class="masthead">
      <div class="logo">
-          <img src={`${base}/photos/USNY.png`} alt="NYCity News Service logo">
+        <a href={`${base}/`}>  <img src={`${base}/photos/USNY.png`} alt="NYCity News Service logo"> </a>
         </div>
       <div class="hero-row">
         <nav class="main-nav">
           <ul class="nav-list">
-            <li><a class="nav-link" href={`${base}/`}>Home</a></li>
-            <li><a class="nav-link" href={`${base}/indv`}>Individuals</a></li>
-            <li><a class="nav-link" href={`${base}/company`}>Organization</a></li>
-            <li><a class="nav-link" href={`${base}/`}>Methodology</a></li>
+            <li><a class="nav-link" href={`${base}/`}><strong>Home</strong></a></li>
+            <li><a class="nav-link" href={`${base}/indv`}><strong>Individuals</strong></a></li>
+            <li><a class="nav-link" href={`${base}/company`}><strong>Organization</strong></a></li>
+            <li><a class="nav-link" href={`${base}/methodology`}><strong>Methodology</strong></a></li>
           </ul>
         </nav>
       </div>
@@ -111,7 +111,7 @@ import { base } from '$app/paths';
   .nav-link {
     color: var(--color-white);
     text-decoration: none;
-    font-family: var(--font-sans);
+    font-family: "DM Sans", sans serif;
     font-size: 20px;
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;

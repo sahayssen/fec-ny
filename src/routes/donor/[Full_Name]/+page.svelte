@@ -7,7 +7,9 @@ let { data } = $props();
 
   const peeps = data.peeps || [];
   const FullName = data.FullName|| '';
-  const peepRows = peeps.filter((item) => item.Full_Name === FullName);
+  const peepRows = peeps
+    .filter((item) => item.Full_Name === FullName)
+    .sort((a, b) => (parseFloat(b.contribution_receipt_amount) || 0) - (parseFloat(a.contribution_receipt_amount) || 0));
   const peep = peepRows[0];
 
     const totalDonated = peepRows.reduce(
@@ -53,7 +55,7 @@ let { data } = $props();
   };
 
 </script>
-<div class="container-wide">
+<div class="homebutton container-wide">
 <button>
   <span> 
   <a class="a.back" href={`${base}/`}>
@@ -69,6 +71,7 @@ let { data } = $props();
     </span>
     <div class="hero-text">
       <h1>{peep?.Full_Name ?? FullName}</h1>
+      <br/>
       <h4> <strong>Occupation:</strong> {peep?.contributor_occupation ?? contributor_occupations}, {peep?.contributor_employer ?? contributor_employer} </h4>
       <h4> <strong>Address:</strong> {peep?.contributor_street_1 ?? contributor_street_1} {peep?.contributor_street_2 ?? contributor_street_2} {peep?.contributor_city ?? contributor_city}, {peep?.contributor_state ?? contributor_state}</h4>
       <h4><strong>Total donated:</strong> {formatCurrency(totalDonated)}</h4>
@@ -218,12 +221,14 @@ button span {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    margin-top: 0.25rem;
+    margin-top: -3rem;
     margin-bottom: 0.5rem;
   }
 
   .hero-text {
     margin-top: 0.15rem;
+    gap: 1rem;
+    line-height: 1em;
   }
 
   .hero-text h1 {
@@ -232,7 +237,11 @@ button span {
 
   .hero-text h4 {
     margin: 0.2rem 0;
+    line-height: 25px;
   }
-
+  .homebutton {
+    margin-left: 8rem;
+    margin-top: 3rem;
+  }
   /* removed .rank-star in favor of .star CSS-only badge */
 </style>

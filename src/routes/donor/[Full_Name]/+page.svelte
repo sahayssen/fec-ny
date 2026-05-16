@@ -2,6 +2,8 @@
 import { base } from '$app/paths';
 
 import RankingList from '$lib/components/Data/RankingList.svelte';
+import DropdownInput from '$lib/components/Forms/DropdownInput.svelte';
+import SearchInput from '$lib/components/Forms/SearchInput.svelte';
 
 let { data } = $props();
 
@@ -39,14 +41,43 @@ let { data } = $props();
 
   const itemsPerPage = 10;
   let currentPage = $state(1);
+  let selectedType = $state('');
+  let selectedCommittee = $state('');
+
+  const committeeTypeOptions = [...new Set(peepRows.map((row) => row.recipient_committee_type).filter(Boolean))]
+    .sort()
+    .map((type) => ({ value: type, label: type }));
   
-  const totalPages = $derived(Math.ceil(peepRows.length / itemsPerPage));
-  const paginatedRows = $derived(
-    peepRows.slice(
+  const committeeOptions = [...new Set(peepRows.map((row) => row.committee_name).filter(Boolean))]
+    .sort()
+    .map((type) => ({ value: type, label: type }));
+
+  let totalPages = $state(1);
+  let paginatedRows = $state([]);
+
+  $effect(() => {
+    const normalizedCommittee = selectedCommittee.trim().toLowerCase();
+    const matchedCommittees = normalizedCommittee
+      ? committeeOptions
+          .filter((option) => option.label.toLowerCase().includes(normalizedCommittee))
+          .map((option) => option.value)
+      : committeeOptions.map((option) => option.value);
+
+    const filteredRows = peepRows.filter((row) => {
+      if (selectedType && row.recipient_committee_type !== selectedType) return false;
+      if (normalizedCommittee && !matchedCommittees.includes(row.committee_name || '')) {
+        return false;
+      }
+      return true;
+    });
+
+    totalPages = Math.max(1, Math.ceil(filteredRows.length / itemsPerPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+    paginatedRows = filteredRows.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
-    )
-  );
+    );
+  });
 
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -58,7 +89,7 @@ let { data } = $props();
 <div class="homebutton container-wide">
 <button>
   <span> 
-  <a class="a.back" href={`${base}/`}>
+  <a class="a.back" href={`${base}/indv`}>
   Back to home
   </a>
   </span>
@@ -70,7 +101,7 @@ let { data } = $props();
       <span class="star-label">{rank ?? '—'}</span>
     </span>
     <div class="hero-text">
-      <h1>{peep?.Full_Name ?? FullName}</h1>
+      <h1><strong>{peep?.Full_Name ?? FullName}</strong></h1>
       <br/>
       <h4> <strong>Occupation:</strong> {peep?.contributor_occupation ?? contributor_occupations}, {peep?.contributor_employer ?? contributor_employer} </h4>
       <h4> <strong>Address:</strong> {peep?.contributor_street_1 ?? contributor_street_1} {peep?.contributor_street_2 ?? contributor_street_2} {peep?.contributor_city ?? contributor_city}, {peep?.contributor_state ?? contributor_state}</h4>
@@ -78,7 +109,24 @@ let { data } = $props();
       <h4><strong>Number of donations:</strong> {donationCount}</h4>
     </div>
   </div>
-
+  <br/>
+  <br/>
+  <div class="filters hero-row">
+      <SearchInput
+     label="Find a Committee"
+     placeholder="Type a committee name"
+     value={selectedCommittee}
+     oninput={(e) => (selectedCommittee = e.target.value)}
+    />
+    <DropdownInput
+      label="Committee Type"
+      placeholder="All committee types…"
+      options={committeeTypeOptions}
+      value={selectedType}
+      onchange={(e) => (selectedType = e.target.value)}
+    />
+  </div> 
+<br/>
 <RankingList>
 <table>
   <thead>
@@ -233,6 +281,7 @@ button span {
 
   .hero-text h1 {
     margin: 0 0 0.35rem 0;
+    font-weight: 600px;
   }
 
   .hero-text h4 {
@@ -242,6 +291,11 @@ button span {
   .homebutton {
     margin-left: 8rem;
     margin-top: 3rem;
+  }
+
+ .filters {
+    font-size: 17px;
+    width: 100%;
   }
   /* removed .rank-star in favor of .star CSS-only badge */
 </style>

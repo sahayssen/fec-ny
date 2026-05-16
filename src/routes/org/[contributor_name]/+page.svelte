@@ -1,5 +1,7 @@
 <script>
 import RankingList from '$lib/components/Data/RankingList.svelte';
+import DropdownInput from '$lib/components/Forms/DropdownInput.svelte';
+import SearchInput from '$lib/components/Forms/SearchInput.svelte';
 import { base } from '$app/paths';
 
 let { data } = $props();
@@ -47,14 +49,39 @@ let { data } = $props();
 
   const itemsPerPage = 10;
   let currentPage = $state(1);
+  let selectedType = $state('');
+  let selectedCommittee = $state('');
 
   let totalPages = $state(1);
   let paginatedRows = $state([]);
 
+  const committeeTypeOptions = [...new Set(orgRows.map((row) => row.recipient_committee_type).filter(Boolean))]
+    .sort()
+    .map((type) => ({ value: type, label: type }));
+
+ const committeeOptions = [...new Set(orgRows.map((row) => row.committee_name).filter(Boolean))]
+    .sort()
+    .map((type) => ({ value: type, label: type }));
+
   $effect(() => {
-    totalPages = Math.max(1, Math.ceil(orgRows.length / itemsPerPage));
+    const normalizedCommittee = selectedCommittee.trim().toLowerCase();
+    const matchedCommittees = normalizedCommittee
+      ? committeeOptions
+          .filter((option) => option.label.toLowerCase().includes(normalizedCommittee))
+          .map((option) => option.value)
+      : committeeOptions.map((option) => option.value);
+
+    const filteredRows = orgRows.filter((row) => {
+      if (selectedType && row.recipient_committee_type !== selectedType) return false;
+      if (normalizedCommittee && !matchedCommittees.includes(row.committee_name || '')) {
+        return false;
+      }
+      return true;
+    });
+
+    totalPages = Math.max(1, Math.ceil(filteredRows.length / itemsPerPage));
     if (currentPage > totalPages) currentPage = totalPages;
-    paginatedRows = orgRows.slice(
+    paginatedRows = filteredRows.slice(
       (currentPage - 1) * itemsPerPage,
       currentPage * itemsPerPage
     );
@@ -67,10 +94,11 @@ let { data } = $props();
   };
 
 </script>
+
 <div class="homebutton container-wide">
 <button>
   <span> 
-  <a class="a.back" href={`${base}/`}>
+  <a class="a.back" href={`${base}/company`}>
   Back to home
   </a>
   </span>
@@ -90,6 +118,24 @@ let { data } = $props();
   <h4><strong>Number of donations:</strong> {donationCount}</h4>
 </div>
 </div>
+<br/>
+<br/>
+  <div class="filters hero-row">
+     <SearchInput
+     label="Find a Committee"
+     placeholder="Type a committee name"
+     value={selectedCommittee}
+     oninput={(e) => (selectedCommittee = e.target.value)}
+    />
+    <DropdownInput
+      label="Committee Type"
+      placeholder="All committee types…"
+      options={committeeTypeOptions}
+      value={selectedType}
+      onchange={(e) => (selectedType = e.target.value)}
+    />
+  </div>
+<br/>
 <RankingList>
 <table>
   <thead>
@@ -114,11 +160,11 @@ let { data } = $props();
 </RankingList>
 {#if totalPages > 1}
   <div class="pagination">
-    <button onclick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
+    <button on:click={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
       Previous
     </button>
     <span class="page-info">Page {currentPage} of {totalPages}</span>
-    <button onclick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
+    <button on:click={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
       Next
     </button>
   </div>
@@ -248,6 +294,7 @@ button span {
 
   .hero-text h1 {
     margin: 0 0 0.35rem 0;
+    font-weight: 600;
   }
 
   .hero-text h4 {
@@ -257,5 +304,9 @@ button span {
   .homebutton {
     margin-left: 8rem;
     margin-top: 3rem;
+  }
+ .filters {
+    font-size: 17px;
+    width: 100%;
   }
 </style>

@@ -1,89 +1,44 @@
-<!--
-@component
-This is your page!
--->
+<!-- Top-ten comparison page -->
 <script>
-import RankingCard from '$lib/components/Data/RankingCard.svelte';
-import RankingList from '$lib/components/Data/RankingList.svelte';
 import { base } from '$app/paths';
-let { data } = $props();
-  const peeps = data.peeps || [];
-  const orgs = data.orgs || [];
+import indvData from '$lib/data/FECindvcongress.json';
+import topTenData from '$lib/data/FECtoptencongress.json';
 
-  // Aggregate contribution_receipt_amount by Full_Name (individuals)
-  const aggPeople = {};
-  peeps.forEach((p) => {
-    const name = p.Full_Name || '';
-    const amt = parseFloat(p.contribution_receipt_amount) || 0;
-    if (!aggPeople[name]) {
-      aggPeople[name] = {
-        Full_Name: name,
-        total: 0,
-        count: 0,
-        contributor_city: p.contributor_city || '',
-      };
-    }
-    aggPeople[name].total += amt;
-    aggPeople[name].count += 1;
-  });
+const nf = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
 
-  // Aggregate contribution_receipt_amount by contributor_name (organizations)
-  const aggOrgs = {};
-  orgs.forEach((o) => {
-    const name = o.contributor_name || '';
-    const amt = parseFloat(o.contribution_receipt_amount) || 0;
-    if (!aggOrgs[name]) {
-      aggOrgs[name] = {
-        contributor_name: name,
-        total: 0,
-        count: 0,
-        contributor_city: o.contributor_city || '',
-      };
-    }
-    aggOrgs[name].total += amt;
-    aggOrgs[name].count += 1;
-  });
+function normalizeList(arr) {
+	return (arr || [])
+		.map((r) => ({ name: r.committee_name || r.committee || '', amount: parseFloat(r.contribution_receipt_amount || r.amount || 0) || 0 }))
+		.sort((a, b) => b.amount - a.amount)
+		.slice(0, 10);
+}
 
-  // Convert to arrays and sort descending by total
-  const ranked = Object.values(aggPeople).sort((a, b) => b.total - a.total);
-  const rankedOrgs = Object.values(aggOrgs).sort((a, b) => b.total - a.total);
-
-  const formatCurrency = (n) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(n);
+const indivTop10 = normalizeList(indvData);
+const toptenTop10 = normalizeList(topTenData);
 </script>
-
-
- <div class="container">
-  <RankingList title="Top Individual Donors">
-    {#each ranked as item, index}
-      <RankingCard
-        rank={index + 1}
-        title={item.Full_Name}
-        description={item.contributor_city}
-        value={formatCurrency(item.total)}
-        valueLabel="total"
-        href={`${base}/donor/${encodeURIComponent(item.Full_Name)}`}
-      />
-    {/each}
-  </RankingList>
-
-  <br/>
-  <br/>
-
-  <RankingList title="Top Organization Donors">
-    {#each rankedOrgs as item, index}
-      <RankingCard
-        rank={index + 1}
-        title={item.contributor_name}
-        description={item.contributor_city}
-        value={formatCurrency(item.total)}
-        valueLabel="total"
-        href={`${base}/org/${encodeURIComponent(item.contributor_name)}`}
-      />
-    {/each}
-  </RankingList>
+<div class="container">
+	<h2>Top 10 Committees — Individual vs TopTen datasets</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Rank</th>
+				<th>Other Individuals</th>
+				<th>Top Ten</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each Array(10) as _, i}
+				<tr>
+					<td>{i + 1}</td>
+					<td>{indivTop10[i] ? indivTop10[i].name : ''}</td>
+					<td>{toptenTop10[i] ? toptenTop10[i].name : ''}</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 </div>
+<style>
+	table { width: 100%; border-collapse: collapse; margin-top: 1rem;  background: #f5f5f5; }
+	th, td { padding: 0.5rem; border: 1px solid #ddd; text-align: left; }
+	th { background: #f5f5f5; }
+</style>

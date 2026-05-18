@@ -17,7 +17,13 @@ const indivTop10 = normalizeList(indvData);
 const toptenTop10 = normalizeList(topTenData);
 </script>
 <div class="container">
-	<h2>Top 10 Committees — Individual vs TopTen datasets</h2>
+<h2> What Elite New Yorkers Want from the 2026 Midterms</h2> 
+<p> Since Zohran Mamdani took office as mayor of New York in January 2026, there's been increased focus on the wealth divide plaguing not just the city, but the state. Billionaires have wrung their hands, opining that they might have to take their business elsewhere were Mamdani's policies to come to fruition.</p> 
+<p> I wanted to get a closer look at who some of these elite New Yorkers are and get a sense of their political priorities by looking at how they are shaping the upcoming midterm elections. To do this, I analyzed FEC data and honed in on the top ten most general individual and corporate/organizational contributors.  </p>
+<h2> <strong> A State, Divided </strong> </h2>
+<p> 
+Perhaps unsurprisingly, the political preferences of elite, individual donors appears to lean more conservative than most New Yorkers. New Yorkers, not including the top ten donors,  donated mostly to Democratic campaign committees, with exception being Republican Mike Lawler’s congressional campaign. While there are some  instances of donors in the top ten giving to Democrats, the top campaign committees for elite donors were entirely Republican.  </p>
+	<h2>Elite vs. The Public: Top Campaign Committees</h2>
 	<table>
 		<thead>
 			<tr>

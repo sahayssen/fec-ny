@@ -90,7 +90,7 @@ let { data } = $props();
 <button>
   <span> 
   <a class="a.back" href={`${base}/indv`}>
-  Back to home
+  Back to individuals
   </a>
   </span>
 </button>

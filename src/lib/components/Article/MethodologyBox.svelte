@@ -111,4 +111,23 @@ of an article.
       font-size: var(--font-size-base);
     }
   }
+
+  /* Mobile tweaks: ensure the methodology box fits comfortably */
+  @include mobile {
+    .end {
+      padding: var(--spacing-md) 0 0;
+    }
+
+    .methodology-box {
+      padding: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+      margin-bottom: 0;
+    }
+
+    .methodology-box.end {
+      padding: var(--spacing-sm);
+      max-width: calc(100% - 2rem);
+      border-radius: 0.375rem;
+    }
+  }
 </style>

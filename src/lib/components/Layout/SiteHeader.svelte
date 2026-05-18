@@ -4,6 +4,7 @@ SiteHeader.svelte — NYCity News Service Style Header
 -->
 <script>
 import { base } from '$app/paths';
+let menuOpen = $state(false);
 </script>
 
 <header class="site-header">
@@ -13,11 +14,25 @@ import { base } from '$app/paths';
         <a href={`${base}/`}>  <img src={`${base}/photos/USNY.png`} alt="NYCity News Service logo"> </a>
         </div>
       <div class="hero-row">
-        <nav class="main-nav">
+        <button
+          class="hamburger"
+          aria-label="Toggle navigation"
+          aria-controls="main-nav"
+          aria-expanded={menuOpen}
+          on:click={() => (menuOpen = !menuOpen)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <nav id="main-nav" class="main-nav" class:open={menuOpen}>
           <ul class="nav-list">
             <li><a class="nav-link" href={`${base}/`}><strong>Home</strong></a></li>
             <li><a class="nav-link" href={`${base}/indv`}><strong>Individuals</strong></a></li>
-            <li><a class="nav-link" href={`${base}/company`}><strong>Organization</strong></a></li>
+            <li><a class="nav-link" href={`${base}/company`}><strong>Organizations</strong></a></li>
             <li><a class="nav-link" href={`${base}/methodology`}><strong>Methodology</strong></a></li>
           </ul>
         </nav>
@@ -91,9 +106,30 @@ import { base } from '$app/paths';
     color: #ff5757;
   }
 
-  /* Navigation - hidden on mobile */
+  /* Navigation - hidden on mobile by default; toggled via hamburger */
   .main-nav {
     display: none;
+    width: 100%;
+  }
+
+  .main-nav.open {
+    display: block;
+  }
+
+  .hamburger {
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+  }
+
+  .hamburger svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   .nav-list {
@@ -106,6 +142,25 @@ import { base } from '$app/paths';
     align-items: center;
     font-size: 1rem;
     justify-content: center;
+  }
+
+  /* Mobile: when menu is open, stack items vertically */
+  .main-nav.open .nav-list {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .main-nav.open .nav-list li {
+    width: 100%;
+  }
+
+  .main-nav.open .nav-list a {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-align: center;
   }
 
   .nav-link {
@@ -145,10 +200,14 @@ import { base } from '$app/paths';
       font-size: 1.5rem;
     }
 
+    .hamburger {
+      display: none;
+    }
+
     .main-nav {
       display: flex;
       align-items: center;
-       justify-content: center;
+      justify-content: center;
       padding: 0 var(--spacing-md) var(--spacing-md);
     }
 

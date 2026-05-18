@@ -72,7 +72,7 @@ import MethodologyBox from '$lib/components/Article/MethodologyBox.svelte';
     <ul>
       <li><a class="footer-link" href={`${base}/`}>Home</a></li>
       <li><a class="footer-link" href={`${base}/indv`}>Individuals</a></li>
-      <li><a class="footer-link" href={`${base}/company`}>Organization</a></li>
+      <li><a class="footer-link" href={`${base}/company`}>Organizations</a></li>
       <li><a class="footer-link" href={`${base}/methodology`}>Methodology</a></li>
     </ul>
   </nav>

@@ -99,7 +99,7 @@ let { data } = $props();
 <button>
   <span> 
   <a class="a.back" href={`${base}/company`}>
-  Back to home
+  Back to organizations
   </a>
   </span>
 </button>

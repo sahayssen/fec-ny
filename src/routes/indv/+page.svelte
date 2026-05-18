@@ -54,7 +54,13 @@ let { data } = $props();
 
 
  <div class="container">
+ <div class="hero-row">
  <img src={`${base}/photos/Individual.png`} alt="NYCity News Service logo">
+ <div class="hero-text">
+ <h1> Individual Donors </h1> 
+ <h4> Over <strong> 90,000 </strong> individuals were included in the dataset used for this project and there were <strong> 382,691 </strong> donations. In total, all individuals donated <strong>$359,726,440.04</strong>. The top ten donors alone contributed a combined <strong>$72,160,479.97</strong>, meaning their contributions accounted for around <strong> 20% </strong>of all individual donations. </h4> 
+</div>
+</div> 
  <br/>
  <br/>
   <RankingList title="Top Individual Donors">
@@ -77,4 +83,30 @@ img {
     width: 30%;
     height: 30%;
 }
+
+  .hero-row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-text {
+    margin-top: 0.15rem;
+    margin-left: 1rem;
+    gap: 1rem;
+    line-height: 1em;
+  }
+
+  .hero-text h1 {
+    margin: 0 0 0.35rem 0;
+    font-weight: 600px;
+  }
+
+  .hero-text h4 {
+    margin: 1rem 0;
+    line-height: 30px;
+  }
 </style>

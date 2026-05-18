@@ -5,26 +5,38 @@ sources, or reporting process behind a story. Typically placed at the bottom
 of an article.
 -->
 <script>
-  let { title = 'How We Reported This Story', children } = $props();
+  let { title = 'How We Reported This Story', children, class: extraClass = '' } = $props();
 </script>
 
-<aside class="methodology-box" aria-label="Methodology">
+<div class="end"> 
+<aside class={`methodology-box ${extraClass}`} aria-label="Methodology">
   <h3 class="methodology-title">{title}</h3>
   <div class="methodology-body">
     {@render children()}
   </div>
 </aside>
+</div> 
 
 <style lang="scss">
   @use '../../styles' as *;
 
+   .end {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 60ch;
+    padding: var(--spacing-md) 0 0;
+    background-color: var(--color-cuny-blue-dark);
+  }
+
   .methodology-box {
     border-top: var(--border-width-accent) solid var(--color-accent);
     background-color: var(--color-light-gray);
-    padding: var(--spacing-md);
-    margin-top: var(--spacing-xl);
-    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-xs);
+    margin-top: var(--spacing-lg);
+    margin-bottom: 0;
     max-width: var(--max-width);
+    align: center;
   }
 
   .methodology-title {
@@ -61,9 +73,38 @@ of an article.
     color: var(--color-dark);
   }
 
+  /* Modifier when used inside the footer: centered, constrained, CUNY blue with white text */
+  .methodology-box.end {
+    margin: 0 auto 0;
+    text-align: left;
+    max-width: 60ch;
+    padding: var(--spacing-sm) 0;
+    background-color: var(--color-cuny-blue-dark);
+    color: var(--color-white);
+    border-top-color: #ff5757;
+  }
+
+  .methodology-box.end .methodology-title {
+    color: var(--color-white);
+    text-align: left;
+  }
+
+  .methodology-box.end .methodology-body {
+    color: var(--color-white);
+    text-align: left;
+  }
+
+  .methodology-box.end :global(a) {
+    color: var(--color-white);
+  }
+
+  .methodology-box.end :global(a:hover) {
+    color: var(--color-accent);
+  }
+
   @include tablet {
     .methodology-box {
-      padding: var(--spacing-md) var(--spacing-lg);
+      padding: var(--spacing-md) var(--spacing-md);
     }
 
     .methodology-body {

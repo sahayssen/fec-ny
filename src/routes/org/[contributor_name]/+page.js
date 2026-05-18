@@ -5,7 +5,7 @@ export function load({ params }) {
     // Set to false to hide the NYCity News Service header
     showHeader: true,
     // Set to false to hide the site footer
-    showFooter: false,
+    showFooter: true,
     orgs,
     contributorName: decodeURIComponent(params.contributor_name),
   };

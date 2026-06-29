@@ -25,8 +25,18 @@ const toptenTop10 = normalizeList(topTenData);
 <p> I wanted to get a closer look at who some of these elite New Yorkers are and get a sense of their political priorities by looking at how they are shaping the upcoming midterm elections. To do this, I analyzed FEC data and honed in on the top ten most general individual and corporate/organizational contributors.  </p>
 <h2> <strong> A State, Divided </strong> </h2>
 <p> 
-Perhaps unsurprisingly, the political preferences of elite, individual donors appears to lean more conservative than most New Yorkers. New Yorkers, not including the top ten donors,  donated mostly to Democratic campaign committees, with exception being Republican Mike Lawler’s congressional campaign. While there are some  instances of donors in the top ten giving to Democrats, the top campaign committees for elite donors were entirely Republican.  </p>
+Perhaps unsurprisingly, the political preferences of the top ten elite, individual New York donors appears to lean more conservative than the rest of New York donors. New Yorkers, not including the top ten donors,  donated mostly to Democratic campaign committees, with exception being Republican Mike Lawler’s congressional campaign. While there are some instances of donors in the top ten giving to Democrats, the top campaign committees for elite donors were entirely Republican.  </p>
 	<h3>Elite vs. The Public: Top Campaign Committees</h3>
+		<div class="legend">
+		<div class="legend-item">
+			<div class="legend-color dem"></div>
+			<span>Democrat</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color rep"></div>
+			<span>Republican</span>
+		</div>
+	</div>
 	<table>
 		<thead>
 			<tr>
@@ -62,4 +72,9 @@ Among the powerful names in the 2026 election season is the United Democracy Pro
 	th { background: #f5f5f5; }
 	td.dem { background-color: #add8e6; }
 	td.rep { background-color: #ffcccb; }
+	.legend { display: flex; gap: 2rem; margin-top: 1rem; font-size: 14px; }
+	.legend-item { display: flex; align-items: center; gap: 0.75rem; }
+	.legend-color { width: 30px; height: 30px; border: 1px solid #ddd; }
+	.legend-color.dem { background-color: #add8e6; }
+	.legend-color.rep { background-color: #ffcccb; }
 </style>

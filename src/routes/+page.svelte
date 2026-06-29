@@ -8,12 +8,12 @@ const nf = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', 
 
 function normalizeList(arr) {
 	return (arr || [])
-		.map((r) => ({ name: r.committee_name || r.committee || '', amount: parseFloat(r.contribution_receipt_amount || r.amount || 0) || 0 }))
+		.map((r) => ({ name: r.committee_name || r.committee || '', amount: parseFloat(r.contribution_receipt_amount || r.amount || 0) || 0, party: r.party_affiliation || '' }))
 		.sort((a, b) => b.amount - a.amount)
 		.slice(0, 10);
 }
 
-const indivTop10 = normalizeList(indvData);
+const indvTop10 = normalizeList(indvData);
 const toptenTop10 = normalizeList(topTenData);
 </script>
 <div class="container">
@@ -39,8 +39,12 @@ Perhaps unsurprisingly, the political preferences of elite, individual donors ap
 			{#each Array(10) as _, i}
 				<tr>
 					<td>{i + 1}</td>
-					<td>{indivTop10[i] ? indivTop10[i].name : ''}</td>
-					<td>{toptenTop10[i] ? toptenTop10[i].name : ''}</td>
+					<td class={indvTop10[i]?.party === 'DEM' ? 'dem' : indvTop10[i]?.party === 'REP' ? 'rep' : ''}>
+						{indvTop10[i] ? indvTop10[i].name : ''}
+					</td>
+					<td class={toptenTop10[i]?.party === 'DEM' ? 'dem' : toptenTop10[i]?.party === 'REP' ? 'rep' : ''}>
+						{toptenTop10[i] ? toptenTop10[i].name : ''}
+					</td>
 				</tr>
 			{/each}
 		</tbody>
@@ -56,4 +60,6 @@ Among the powerful names in the 2026 election season is the United Democracy Pro
 	table { width: 100%; border-collapse: collapse; margin-top: 1rem;  background: #f5f5f5; }
 	th, td { padding: 0.5rem; border: 1px solid #ddd; text-align: left; }
 	th { background: #f5f5f5; }
+	td.dem { background-color: #add8e6; }
+	td.rep { background-color: #ffcccb; }
 </style>

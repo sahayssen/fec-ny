@@ -1,82 +1,103 @@
 [
   {
     "committee_name": "BRIAN JACK FOR CONGRESS",
-    "contribution_receipt_amount": "33500.0"
+    "contribution_receipt_amount": "33500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "WHATLEY FOR SENATE",
-    "contribution_receipt_amount": "31500.0"
+    "contribution_receipt_amount": "31500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "IOWANS FOR ZACH NUNN",
-    "contribution_receipt_amount": "31500.0"
+    "contribution_receipt_amount": "31500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "RULLI FOR OHIO",
-    "contribution_receipt_amount": "31000.0"
+    "contribution_receipt_amount": "31000.0",
+    "party_affiliation": "REP"
+
   },
   {
     "committee_name": "STEIL FOR WISCONSIN, INC.",
-    "contribution_receipt_amount": "28000.0"
+    "contribution_receipt_amount": "28000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "TUBERVILLE FOR SENATE, INC.",
-    "contribution_receipt_amount": "28000.0"
+    "contribution_receipt_amount": "28000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "KANSANS FOR MARSHALL",
-    "contribution_receipt_amount": "28000.0"
+    "contribution_receipt_amount": "28000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "ROGERS FOR SENATE",
-    "contribution_receipt_amount": "28000.0"
+    "contribution_receipt_amount": "28000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "CISCOMANI FOR CONGRESS",
-    "contribution_receipt_amount": "24500.0"
+    "contribution_receipt_amount": "24500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "ROB FOR PA",
-    "contribution_receipt_amount": "24500.0"
+    "contribution_receipt_amount": "24500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "MILLER-MEEKS FOR CONGRESS",
-    "contribution_receipt_amount": "24500.0"
+    "contribution_receipt_amount": "24500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "TED CRUZ FOR SENATE",
-    "contribution_receipt_amount": "24500.0"
+    "contribution_receipt_amount": "24500.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "THE PAT HARRIGAN COMMITTEE",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "TOM BARRETT FOR CONGRESS",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "FRIENDS OF JOHN BARRASSO",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "MCDOWELL FOR CONGRESS",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "SCALISE FOR CONGRESS",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+     "party_affiliation": "REP"
   },
   {
     "committee_name": "MIKE COLLINS FOR SENATE",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+     "party_affiliation": "REP"
   },
   {
     "committee_name": "ASHLEY FOR IOWA",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "ALASKANS FOR NICK BEGICH",
-    "contribution_receipt_amount": "21000.0"
+    "contribution_receipt_amount": "21000.0",
+    "party_affiliation": "REP"
   }
 ]

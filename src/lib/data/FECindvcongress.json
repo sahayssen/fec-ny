@@ -1,83 +1,110 @@
 [
   {
     "committee_name": "TORRES FOR CONGRESS",
-    "contribution_receipt_amount": "2581902.85"
+    "contribution_receipt_amount": "2581902.85",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "PAT RYAN FOR CONGRESS",
-    "contribution_receipt_amount": "2266629.09"
+    "contribution_receipt_amount": "2266629.09",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "JON OSSOFF FOR SENATE",
-    "contribution_receipt_amount": "2129092.37"
+    "contribution_receipt_amount": "2129092.37",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "LAWLER FOR CONGRESS, INC.",
-    "contribution_receipt_amount": "1917473.82"
+    "contribution_receipt_amount": "1917473.82",
+    "party_affiliation": "REP"
+
   },
   {
     "committee_name": "LASHER FOR CONGRESS",
-    "contribution_receipt_amount": "1755290.0"
+    "contribution_receipt_amount": "1755290.0",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "COOPER FOR NORTH CAROLINA",
-    "contribution_receipt_amount": "1327275.5"
+    "contribution_receipt_amount": "1327275.5",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "DAN GOLDMAN FOR NEW YORK",
-    "contribution_receipt_amount": "1218066.98"
+    "contribution_receipt_amount": "1218066.98",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "CORY BOOKER FOR SENATE",
-    "contribution_receipt_amount": "1200003.0"
+    "contribution_receipt_amount": "1200003.0",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "JOSH RILEY FOR CONGRESS",
-    "contribution_receipt_amount": "1185644.88"
+    "contribution_receipt_amount": "1185644.88",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "FRIENDS OF MARK WARNER",
-    "contribution_receipt_amount": "1134017.5"
+    "contribution_receipt_amount": "1134017.5",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "FRIENDS OF SHERROD BROWN",
-    "contribution_receipt_amount": "1116388.68"
+    "contribution_receipt_amount": "1116388.68",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "ELISE FOR CONGRESS",
-    "contribution_receipt_amount": "1092120.63"
+    "contribution_receipt_amount": "1092120.63",
+    "party_affiliation": "REP"
   },
   {
     "committee_name": "SUOZZI FOR CONGRESS",
-    "contribution_receipt_amount": "1064782.09"
+    "contribution_receipt_amount": "1064782.09",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "GILLEN FOR NY",
-    "contribution_receipt_amount": "1007015.26"
+    "contribution_receipt_amount": "1007015.26",
+    "party_affiliation": "DEM"
+
   },
   {
     "committee_name": "RO FOR CONGRESS INC",
-    "contribution_receipt_amount": "972775.0"
+    "contribution_receipt_amount": "972775.0",
+    "party_affiliation": "DEM"
+  },
+  {
+    "committee_name": "RO FOR CONGRESS INC",
+    "contribution_receipt_amount": "972775.0",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "GILLIBRAND FOR SENATE",
-    "contribution_receipt_amount": "903077.34"
+    "contribution_receipt_amount": "903077.34",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "KENNEDY FOR CONGRESS",
-    "contribution_receipt_amount": "887875.55"
+    "contribution_receipt_amount": "887875.55",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "BETH DAVIDSON FOR CONGRESS",
-    "contribution_receipt_amount": "859430.0"
+    "contribution_receipt_amount": "859430.0",
+    "party_affiliation": "DEM"
   },
   {
     "committee_name": "TALARICO FOR TEXAS",
-    "contribution_receipt_amount": "832126.63"
+    "contribution_receipt_amount": "832126.63",
+    "party_affiliation": "DEM"
   },
   {
 
     "committee_name": "BLAKE FOR THE NORTH COUNTRY",
-    "contribution_receipt_amount": "802926.51"
+    "contribution_receipt_amount": "802926.51",
+    "party_affiliation": "DEM"
   }
 ]
